@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore how ratings, effort, and deadline pressure shape the task scoring model."
+    />
+    <title>“What’s a task that gets you excited?” | The Model</title>
+    <link rel="stylesheet" href="css/interactive.css" />
+    <script src="js/interactive.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">The model · theory</p>
+          <div class="page-title-row">
+            <h1>“What’s a task that gets you excited?”</h1>
+            <a class="applied-link" href="applied-example.html">
+              See it applied <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <p class="intro">
+            Explore how interest, impact, effort, and deadline pressure combine.
+            Adjust the inputs to see each layer of the model change. Scores are
+            prompts for reflection, not priority rankings.
+          </p>
+          <aside class="example-tldr" aria-labelledby="example-tldr-title">
+            <h2 id="example-tldr-title">TL;DR: what might make work exciting for you?</h2>
+            <p>
+              You seem most excited by work that gives you an interesting
+              challenge and makes something better for people. Helping lots of
+              people matters, but may not be enough if the work itself doesn’t
+              engage you. This is a personal pattern, not a rule or a measure
+              of how important a task is.
+            </p>
+          </aside>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Task score explorer">
+        <section class="controls-panel" aria-labelledby="inputs-title">
+          <div class="section-heading">
+            <p class="eyebrow">Your inputs</p>
+            <h2 id="inputs-title">Shape the task</h2>
+            <p>Move any slider; your scores update immediately.</p>
+          </div>
+          <button class="reset-button" id="reset-controls" type="button">Reset all sliders</button>
+
+          <fieldset class="metric-group">
+            <legend><span class="group-number">01</span> Intrinsic</legend>
+            <p class="group-description">How the work feels to you.</p>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="interest">Subject interest</label>
+                <output for="interest" id="interest-value">0</output>
+              </div>
+              <input id="interest" name="interest" type="range" min="0" max="10" step="0.5" value="0" />
+              <div class="range-ends" aria-hidden="true"><span>0</span><span>10</span></div>
+              <p class="metric-hint">How much the subject matter interests you.</p>
+            </div>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="challenge">Technical challenge</label>
+                <output for="challenge" id="challenge-value">0</output>
+              </div>
+              <input id="challenge" name="challenge" type="range" min="0" max="10" step="0.5" value="0" />
+              <div class="range-ends" aria-hidden="true"><span>0</span><span>10</span></div>
+              <p class="metric-hint">From routine or shallow work to exploratory or deep work.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="metric-group">
+            <legend><span class="group-number">02</span> Extrinsic</legend>
+            <p class="group-description">The effect the work has beyond you.</p>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="impact">Impact per user</label>
+                <output for="impact" id="impact-value">0</output>
+              </div>
+              <input class="impact-range" id="impact" name="impact" type="range" min="-10" max="10" step="1" value="0" />
+              <div class="range-ends" aria-hidden="true"><span>−10</span><span>+10</span></div>
+              <p class="metric-hint">A negative value means the change could harm users; more negative values appear redder.</p>
+            </div>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="reach">Reach</label>
+                <output for="reach" id="reach-value">0</output>
+              </div>
+              <input id="reach" name="reach" type="range" min="0" max="10" step="0.1" value="0" />
+              <div class="range-ends" aria-hidden="true"><span>0</span><span>10</span></div>
+              <p class="metric-hint">0 means no users reached; 10 means the broadest relevant audience.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="metric-group effort-group">
+            <legend><span class="group-number">03</span> Time</legend>
+            <p class="group-description">Effort affects adjusted value; available time shows fit.</p>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="effort">Estimated effort</label>
+                <output for="effort" id="effort-value">32 hours</output>
+              </div>
+              <input id="effort" name="effort" type="range" min="1" max="80" step="1" value="32" />
+              <div class="range-ends" aria-hidden="true"><span>1 hour</span><span>80 hours</span></div>
+            </div>
+            <div class="slider-control">
+              <div class="slider-label">
+                <label for="budget">Available time</label>
+                <output for="budget" id="budget-value">24 hours</output>
+              </div>
+                <input
+                  id="budget"
+                  name="budget"
+                  type="range"
+                  min="0"
+                  max="80"
+                  step="1"
+                  value="24"
+                />
+              <div class="range-ends" aria-hidden="true"><span>0 hours</span><span>80 hours</span></div>
+              <p class="time-fit" id="time-fit" aria-live="polite"></p>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="results-panel" aria-labelledby="results-title">
+          <div class="section-heading">
+            <p class="eyebrow">Live results</p>
+            <h2 id="results-title">See the tradeoffs</h2>
+            <p>Subject interest, technical challenge, and reach are rated from 0 to 10; impact runs from −10 to +10.</p>
+          </div>
+
+          <div class="score-summary" aria-live="polite" aria-atomic="true">
+            <article class="score-card score-card-primary">
+              <span class="score-label">Overall score</span>
+              <strong class="score-value" id="overall-score">0.0</strong>
+              <span class="score-caption">55% intrinsic + 45% extrinsic</span>
+            </article>
+            <article class="score-card score-card-adjusted">
+              <span class="score-label">Effort-adjusted overall</span>
+              <strong class="score-value" id="adjusted-score">-4.0</strong>
+              <span class="score-caption">55% intrinsic + 45% extrinsic adjusted</span>
+            </article>
+            <article class="score-card score-card-deadline">
+              <span class="score-label">Deadline-adjusted overall</span>
+              <strong class="score-value" id="deadline-score">-4.0</strong>
+              <span class="score-caption">Effort-adjusted score × deadline factor</span>
+            </article>
+          </div>
+
+          <div class="component-scores">
+            <article class="component-card">
+              <div class="component-heading">
+                <span class="component-icon" aria-hidden="true">↗</span>
+                <div><h3>Intrinsic</h3><p>Interest + challenge</p></div>
+                <strong id="intrinsic-score">0.0</strong>
+              </div>
+              <div class="component-detail">
+                <span>Time-adjusted intrinsic</span><strong id="adjusted-intrinsic">-4.0</strong>
+              </div>
+            </article>
+            <article class="component-card">
+              <div class="component-heading">
+                <span class="component-icon component-icon-extrinsic" aria-hidden="true">◎</span>
+                <div><h3>Extrinsic</h3><p>Impact × reach ÷ 10</p></div>
+                <strong id="extrinsic-score">0.0</strong>
+              </div>
+              <div class="component-detail">
+                <span>Time-adjusted extrinsic</span><strong id="adjusted-extrinsic">-4.0</strong>
+              </div>
+            </article>
+          </div>
+
+          <aside class="model-note">
+            <h3>How the score works</h3>
+            <p>Intrinsic averages subject interest and technical challenge (both rated from 0 to 10). Extrinsic is impact per user × reach ÷ 10, where impact is −10 to +10 and reach is 0 to 10. Overall is 55% intrinsic + 45% extrinsic, giving intrinsic a slight preference.</p>
+            <p>For each component, effort adjustment is <code>score − (hours ÷ 8) × (1 − 0.5 × score ÷ 10)</code>. At a component score of 0, each 8 hours costs 1 point; higher scores reduce that cost and lower scores increase it.</p>
+            <p>Deadline factor is <code>0.25 + 0.75 × min(available ÷ estimated, 1)</code>. It scales a positive effort-adjusted overall score, reaching 0.25× when no time is available. Negative scores are left unchanged so deadline pressure cannot make a net-negative result appear less negative.</p>
+            <p class="time-note">Available time affects the deadline factor; it does not change the effort-adjusted component scores.</p>
+          </aside>
+          <a class="applied-cta" href="applied-example.html">
+            <span>See it applied: Dairy Queen iOS example</span>
+            <span class="applied-cta-arrow" aria-hidden="true">↗</span>
+          </a>
+          <p class="starting-values">Interest, challenge, impact, and reach start at 0 for a raw overall score of 0.0. Effort starts at 32 hours and available time at 24 hours.</p>
+        </section>
+      </section>
+      <footer>Illustrative ratings and model settings—not calibrated recommendations.</footer>
+    </main>
+  </body>
+</html>

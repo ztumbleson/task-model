@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="See the scoring model applied to a representative mix of Dairy Queen iOS engineering work."
+    />
+    <title>“What’s a task that gets you excited?” | Applied Example</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/charts.css" />
+    <link rel="stylesheet" href="css/task-details.css" />
+    <script src="js/task-data.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">A worked example · Dairy Queen iOS app</p>
+          <h1>Model in practice</h1>
+          <p class="intro">
+            See how the model compares a representative mix of
+            engineering work for the Dairy Queen iOS app, including tasks
+            tailored to work you’ve done. Your ratings reflect your
+            assessments.
+          </p>
+        </div>
+        <a class="model-link" href="index.html">
+          Explore the model <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <section class="board" aria-labelledby="map-title">
+        <div class="board-heading">
+          <div>
+            <h2 id="map-title">Task map</h2>
+            <p>Subject interest, technical challenge, and reach run from 0 to 10; impact per user runs from −10 to +10. Each point is a task; exact overlaps are nudged apart. IDs match the task list below.</p>
+          </div>
+        </div>
+
+        <div class="plane-grid">
+          <section class="plane-card" aria-labelledby="intrinsic-title">
+            <div class="plane-heading">
+              <h3 id="intrinsic-title">Intrinsic</h3>
+              <p>Technical challenge runs from routine/shallow (0) to exploratory/deep (10).</p>
+            </div>
+            <div class="plane-chart">
+              <div class="plane-y-label">Technical challenge</div>
+              <div
+                class="plane-plot plane-plot-positive-x"
+                id="intrinsic-plot"
+                role="group"
+                aria-label="Intrinsic plane: subject interest by technical challenge"
+              >
+                <span class="y-sign y-sign-positive" aria-hidden="true">10</span>
+                <span class="y-sign y-sign-negative" aria-hidden="true">0</span>
+                <span class="quadrant-label quadrant-top-left" aria-hidden="true">more challenging, less interesting</span>
+                <span class="quadrant-label quadrant-top-right" aria-hidden="true">more challenging, more interesting</span>
+                <span class="quadrant-label quadrant-bottom-left" aria-hidden="true">less challenging, less interesting</span>
+                <span class="quadrant-label quadrant-bottom-right" aria-hidden="true">less challenging, more interesting</span>
+              </div>
+              <div class="plane-x-label">Subject interest</div>
+              <div class="plot-endpoints plot-endpoints-interest" aria-hidden="true">
+                <span>0</span>
+                <span>5</span>
+                <span>10</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="plane-card" aria-labelledby="extrinsic-title">
+            <div class="plane-heading">
+              <h3 id="extrinsic-title">Extrinsic</h3>
+              <p>Reach runs from no users (0) to the broadest relevant audience (10).</p>
+            </div>
+            <div class="plane-chart">
+              <div class="plane-y-label">Reach</div>
+              <div
+                class="plane-plot plane-plot-positive-y"
+                id="extrinsic-plot"
+                role="group"
+                aria-label="Extrinsic plane: impact per user by reach"
+              >
+                <span class="y-sign y-sign-positive" aria-hidden="true">10</span>
+                <span class="y-sign y-sign-negative" aria-hidden="true">0</span>
+                <span class="quadrant-label quadrant-top-left" aria-hidden="true">broad reach, negative impact</span>
+                <span class="quadrant-label quadrant-top-right" aria-hidden="true">broad, positive impact</span>
+                <span class="quadrant-label quadrant-bottom-left" aria-hidden="true">limited reach, negative impact</span>
+                <span class="quadrant-label quadrant-bottom-right" aria-hidden="true">limited reach, positive impact</span>
+              </div>
+              <div class="plane-x-label">Impact per user</div>
+              <div class="plot-endpoints" aria-hidden="true">
+                <span>−</span>
+                <span>0</span>
+                <span>+</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="plane-card" aria-labelledby="combined-title">
+            <div class="plane-heading">
+              <h3 id="combined-title">Overall</h3>
+              <p>Each axis shows its plane's average score from the two ratings above; the upper-right "Excited" square marks intrinsic score above 5 and positive extrinsic score.</p>
+            </div>
+            <div class="plane-chart">
+              <div class="plane-y-label">Extrinsic score</div>
+              <div
+                class="plane-plot plane-plot-positive-x"
+                id="combined-plot"
+                role="group"
+                aria-label="Combined view: intrinsic score by extrinsic score"
+              >
+                <span class="excited-zone" aria-hidden="true"><span>"Excited"</span></span>
+                <span class="y-sign y-sign-positive" aria-hidden="true">+</span>
+                <span class="y-sign y-sign-negative" aria-hidden="true">−</span>
+                <span class="quadrant-label quadrant-top-left" aria-hidden="true">valuable to others, less intrinsically engaging</span>
+                <span class="quadrant-label quadrant-bottom-left" aria-hidden="true">limited intrinsic appeal and external value</span>
+                <span class="quadrant-label quadrant-bottom-right" aria-hidden="true">intrinsically engaging, modest outward impact</span>
+              </div>
+              <div class="plane-x-label">Intrinsic score</div>
+              <div class="plot-endpoints plot-endpoints-interest" aria-hidden="true">
+                <span>0</span>
+                <span>5</span>
+                <span>10</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="plane-card" aria-labelledby="overall-chart-title">
+            <div class="plane-heading">
+              <h3 id="overall-chart-title">Overall score by task</h3>
+              <p>Each bar shows overall score (55% intrinsic + 45% extrinsic); the dashed "Excited" line marks +5. Hover for the full task name and score.</p>
+            </div>
+            <div class="overall-chart">
+              <div class="overall-y-label">Overall score</div>
+              <div
+                class="overall-plot"
+                id="overall-plot"
+                role="group"
+                aria-label="Overall composed score for each task, from minus ten to plus ten"
+              >
+                <span class="score-tick score-tick-positive" aria-hidden="true">+10</span>
+                <span class="score-tick score-tick-zero" aria-hidden="true">0</span>
+                <span class="score-tick score-tick-negative" aria-hidden="true">−10</span>
+                <span class="overall-excited-line" aria-hidden="true"><span>"Excited"</span></span>
+                <div class="overall-bars" id="overall-bars"></div>
+              </div>
+              <div class="overall-x-label">Task</div>
+              <div class="overall-task-labels" id="overall-task-labels" aria-hidden="true"></div>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <section class="board value-caveat" aria-labelledby="value-caveat-title">
+        <div class="board-heading">
+          <div>
+            <h2 id="value-caveat-title">A caveat: priorities don't always align</h2>
+            <p>
+              In software engineering, the work that helps users or teams most
+              doesn't always make the most money. Work that is intrinsically
+              meaningful to an engineer or extrinsically valuable to users may
+              be deprioritized when it has no clear path to revenue, while
+              revenue-generating work can take priority even when it isn't the
+              most useful.
+            </p>
+          </div>
+        </div>
+        <figure class="venn-figure">
+          <div
+            class="venn-diagram"
+            role="img"
+            aria-label="Three overlapping circles: Work that needs done, Work that I enjoy, and Work that makes money."
+            aria-describedby="venn-description"
+          >
+            <div class="venn-circle venn-needs"><span>Work that needs done</span></div>
+            <div class="venn-circle venn-enjoy"><span>Work that I enjoy</span></div>
+            <div class="venn-circle venn-money"><span>Work that makes money</span></div>
+          </div>
+          <figcaption id="venn-description">
+            The shared center is intentionally small, and enjoyment only lightly
+            overlaps with work that needs doing or makes money. This conceptual
+            caveat is not another score.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="board task-board" aria-labelledby="tasks-title">
+        <div class="board-heading">
+          <div>
+            <h2 id="tasks-title">Tasks</h2>
+          </div>
+        </div>
+        <div class="task-list-heading" aria-hidden="true">
+          <span>Task</span>
+        </div>
+        <ol class="task-list" id="task-list"></ol>
+      </section>
+
+      <footer>
+        <p>Your ratings and task choices reflect your assessments. Task descriptions, pros, and cons are illustrative; edit app.js to update the example.</p>
+      </footer>
+    </main>
+    <div class="task-tooltip" id="task-tooltip" role="tooltip" aria-hidden="true"></div>
+    <dialog class="task-modal" id="task-modal" aria-labelledby="task-modal-title">
+      <div class="task-modal-header">
+        <h2 id="task-modal-title"></h2>
+        <button
+          class="task-modal-close"
+          id="task-modal-close"
+          type="button"
+          aria-label="Close task details"
+        >
+          ×
+        </button>
+      </div>
+      <div id="task-modal-content"></div>
+    </dialog>
+  </body>
+</html>
